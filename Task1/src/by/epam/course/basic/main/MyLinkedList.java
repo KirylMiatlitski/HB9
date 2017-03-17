@@ -24,18 +24,13 @@ public class MyLinkedList<T>{
 	public void addFirst(T obj) {
 		MyElement<T> temp = new MyElement<T>(obj);
 		if (getSize() == 0){			
-			temp.setNext(tail);
-			temp.setPrevious(head);
+			temp.setNext(null);
 			head.setNext(temp);
-			head.setPrevious(null);
-			tail.setPrevious(temp);
-			tail.setNext(null);
+			tail.setNext(temp);
 			setSize(getSize()+1);
 		} else {
-			head.getNext().setPrevious(temp);		
 			temp.setNext(head.getNext());			
 			head.setNext(temp);	
-			temp.setPrevious(head);	
 			setSize(getSize()+1);
 		}		
 	}
@@ -43,18 +38,14 @@ public class MyLinkedList<T>{
 	public void addLast(T obj) {
 		MyElement<T> temp = new MyElement<T>(obj);
 		if (getSize() == 0){			
-			temp.setNext(tail);
-			temp.setPrevious(head);
+			temp.setNext(null);
 			head.setNext(temp);
-			head.setPrevious(null);
-			tail.setPrevious(temp);
-			tail.setNext(null);
+			tail.setNext(temp);
 			setSize(getSize()+1);
 		} else {
-			tail.getPrevious().setNext(temp);		
-			temp.setPrevious(tail.getPrevious());			
-			tail.setPrevious(temp);	
-			temp.setNext(tail);	
+			temp.setNext(null);
+			tail.getNext().setNext(temp);
+			tail.setNext(temp);
 			setSize(getSize()+1);
 		}		
 	}
@@ -64,13 +55,11 @@ public class MyLinkedList<T>{
 		
 		if ((i <= this.getSize()) & (i > 0)) {
 			MyElement<T> search = this.head;
-			for (int j = 0; j < i; j++ ){
+			for (int j = 0; j < i-1; j++ ){
 				search =  search.getNext();
 			}
-			temp.setPrevious(search.getPrevious());
-			temp.setNext(search);
-			search.getPrevious().setNext(temp);
-			search.setPrevious(temp);
+			temp.setNext(search.getNext());
+			search.setNext(temp);
 			setSize(getSize()+1);
 			 
 		} else {
@@ -81,15 +70,17 @@ public class MyLinkedList<T>{
 	
 	public boolean delete(T obj){
 		MyElement<T> temp = head;
+		MyElement<T> temp_prev = head;
+		
 		for (int i = 0; i < this.getSize(); i++){
 			temp = temp.getNext();
 			if (temp.getElement().equals(obj)){
-				temp.getPrevious().setNext(temp.getNext());
-				temp.getNext().setPrevious(temp.getPrevious());
+				temp_prev.setNext(temp.getNext());
 				setSize(getSize()-1);
 				
 				return true;
 			}
+			temp_prev = temp;
 		}		
 		return false;
 	}

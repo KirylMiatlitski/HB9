@@ -3,7 +3,7 @@ package by.epam.course.basic.main;
 /**
  * @author Kiryl_Miatlitski
  *
- * date: 5 March 2017 - 11 March 2017
+ * date: 5 March 2017 - 11 March 20171
  * 
  * 
  * Task Реализуйте самостоятельно динамическую структуру Односвязный список. Реализуйте методы добавления 
